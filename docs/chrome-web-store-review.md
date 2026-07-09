@@ -42,8 +42,8 @@
 ## GitHub Pages
 
 - 使用 `docs/` 作为静态页源。
-- 建议 URL：`https://cf-jx.github.io/doubao-export-chat/`。
-- 隐私政策 URL：`https://cf-jx.github.io/doubao-export-chat/privacy.html`。
+- 建议 URL：`https://cf-jx.github.io/doubao-export-chat-free/`。
+- 隐私政策 URL：`https://cf-jx.github.io/doubao-export-chat-free/privacy.html`。
 - GitHub Pages 只是展示和隐私政策承载，不能替代 Chrome Web Store 的 Privacy tab、权限说明和测试说明。
 
 ## 官方来源

@@ -50,4 +50,4 @@
 
 ## 隐私政策链接
 
-https://cf-jx.github.io/doubao-export-chat/privacy.html
+https://cf-jx.github.io/doubao-export-chat-free/privacy.html

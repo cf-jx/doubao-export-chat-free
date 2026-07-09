@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>豆包导出助手隐私政策</title>
+    <meta name="description" content="豆包导出助手隐私政策：本地处理豆包网页对话，不上传聊天记录到服务器。">
+    <link rel="canonical" href="https://cf-jx.github.io/doubao-export-chat/privacy.html">
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f7f9;
+        --surface: #ffffff;
+        --text: #15181d;
+        --muted: #687182;
+        --border: #e6e8ee;
+        --accent: #0f766e;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-size: 16px;
+        line-height: 1.7;
+      }
+      main {
+        width: min(760px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 48px 0 64px;
+      }
+      article {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 28px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        line-height: 1.25;
+      }
+      h2 {
+        margin: 28px 0 8px;
+        font-size: 18px;
+      }
+      p, ul {
+        margin: 10px 0;
+      }
+      a {
+        color: var(--accent);
+      }
+      .muted {
+        color: var(--muted);
+      }
+      @media (max-width: 520px) {
+        main {
+          width: min(100% - 20px, 760px);
+          padding: 24px 0 40px;
+        }
+        article {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <article>
+        <h1>豆包导出助手隐私政策</h1>
+        <p class="muted">生效日期：2026-07-09</p>
+        <p>豆包导出助手用于在浏览器本地备份本人豆包网页对话。</p>
+
+        <h2>数据处理</h2>
+        <ul>
+          <li>扩展会在豆包网页中读取当前对话内容，用于生成用户主动导出的文件。</li>
+          <li>扩展会在浏览器本地保存导出设置、运行状态和必要缓存。</li>
+          <li>扩展不会把聊天记录、导出内容或个人身份信息上传到服务器。</li>
+          <li>扩展不提供账号系统，也不做跨设备同步。</li>
+        </ul>
+
+        <h2>权限用途</h2>
+        <ul>
+          <li><code>storage</code>：保存导出设置、缓存和运行状态。</li>
+          <li><code>downloads</code>：保存用户主动导出的文件。</li>
+          <li><code>unlimitedStorage</code>：支持大对话和图片导出的本地缓存。</li>
+          <li>豆包域名访问权限：只在豆包网页中运行导出面板并读取当前网页对话数据。</li>
+        </ul>
+
+        <h2>用户控制</h2>
+        <p>用户可以在 Chrome 扩展管理页卸载扩展。卸载扩展会删除扩展本地存储的数据。用户也可以在浏览器下载目录中自行管理导出的文件。</p>
+
+        <h2>联系与更新</h2>
+        <p>隐私政策如有更新，会随仓库和发布页面同步更新。</p>
+        <p><a href="./">返回首页</a></p>
+      </article>
+    </main>
+  </body>
+</html>

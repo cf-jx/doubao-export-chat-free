@@ -1,0 +1,104 @@
+:root {
+  color-scheme: light;
+
+  /* Spacing scale */
+  --dbx-space-xs: 4px;
+  --dbx-space-sm: 8px;
+  --dbx-space-md: 12px;
+  --dbx-space-lg: 16px;
+  --dbx-space-xl: 20px;
+  --dbx-space-2xl: 28px;
+  --dbx-space-3xl: 40px;
+  --dbx-space-4xl: 56px;
+
+  /* Legacy spacing aliases (kept for selectors that still reference them) */
+  --dbx-space-1: var(--dbx-space-xs);
+  --dbx-space-2: var(--dbx-space-sm);
+  --dbx-space-3: var(--dbx-space-md);
+  --dbx-space-4: var(--dbx-space-lg);
+  --dbx-space-5: var(--dbx-space-xl);
+  --dbx-space-6: var(--dbx-space-2xl);
+  --dbx-space-7: var(--dbx-space-3xl);
+  --dbx-space-8: var(--dbx-space-4xl);
+
+  /* Radius - Squircle approx */
+  --dbx-radius-xs: 6px;
+  --dbx-radius-sm: 8px;
+  --dbx-radius-md: 12px;
+  --dbx-radius-lg: 16px;
+  --dbx-radius-xl: 20px;
+  --dbx-radius-pill: 999px;
+  --dbx-radius-round: 999px;
+
+  /* Typography */
+  --dbx-font-sans: "PingFang SC", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --dbx-font-display: "PingFang SC", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  --dbx-font-mono: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  --dbx-text-xs: 11px;
+  --dbx-text-sm: 12px;
+  --dbx-text-base: 13px;
+  --dbx-text-md: 14px;
+  --dbx-text-lg: 16px;
+  --dbx-text-xl: 20px;
+  --dbx-text-2xl: 28px;
+
+  --dbx-leading-tight: 1.25;
+  --dbx-leading-body: 1.55;
+
+  --dbx-weight-regular: 400;
+  --dbx-weight-medium: 500;
+  --dbx-weight-semibold: 600;
+  --dbx-weight-bold: 700;
+
+  /* Surfaces and neutrals - Apple macOS style */
+  --dbx-color-page: transparent;
+  --dbx-color-bg: #F7F7F5; /* App background */
+  --dbx-color-surface: #FFFFFF;
+  --dbx-color-surface-soft: #F2F2EF;
+  --dbx-color-surface-strong: #E9E9E4;
+  --dbx-color-panel: rgba(255, 255, 255, 0.95);
+
+  /* Text - Apple dark grays */
+  --dbx-color-text: #222220;
+  --dbx-color-text-strong: #11110F;
+  --dbx-color-text-muted: #7E7D78;
+  --dbx-color-text-soft: #A09F98;
+
+  /* Borders - Very subtle */
+  --dbx-color-border: rgba(0, 0, 0, 0.05);
+  --dbx-color-border-strong: rgba(0, 0, 0, 0.1);
+
+  /* Accent - Apple Blue */
+  --dbx-color-accent: #0071E3;
+  --dbx-color-accent-strong: #0077ED;
+  --dbx-color-accent-soft: rgba(0, 113, 227, 0.1);
+  --dbx-color-accent-surface: rgba(0, 113, 227, 0.15);
+  --dbx-color-accent-ink: #FFFFFF;
+
+  /* Feedback */
+  --dbx-color-progress-track: rgba(0, 0, 0, 0.05);
+  --dbx-color-success: #34C759;
+  --dbx-color-success-soft: rgba(52, 199, 89, 0.1);
+  --dbx-color-warning: #FF9500;
+  --dbx-color-warning-soft: rgba(255, 149, 0, 0.1);
+  --dbx-color-danger: #FF3B30;
+  --dbx-color-danger-soft: rgba(255, 59, 48, 0.1);
+  --dbx-color-toast: rgba(0, 0, 0, 0.85);
+
+  /* Elevation - macOS soft diffuse shadows */
+  --dbx-shadow-panel: 0 24px 56px rgba(37, 35, 31, 0.12), 0 0 0 1px rgba(37, 35, 31, 0.05);
+  --dbx-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --dbx-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+
+  /* Legacy shadow aliases */
+  --dbx-shadow-md: var(--dbx-shadow-hover);
+  --dbx-shadow-lg: var(--dbx-shadow-panel);
+
+  /* Motion */
+  --dbx-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dbx-ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --dbx-ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --dbx-duration-fast: 140ms;
+  --dbx-duration-base: 180ms;
+}

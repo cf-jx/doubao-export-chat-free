@@ -1,0 +1,15 @@
+node_modules/
+dist/
+dist-obfuscated/
+chatshell-reference/
+*.log
+.DS_Store
+.playwright-mcp/
+out-*.png
+mock-ui-*.png
+preview-server.log
+preview-server.err.log
+secrets/
+release-artifacts/
+tools/LicenseManager/.build/
+tools/LicenseManager/build/

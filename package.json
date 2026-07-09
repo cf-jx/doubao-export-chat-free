@@ -1,0 +1,14 @@
+{
+  "name": "doubao-export-chat",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome extension for exporting Doubao web conversations locally.",
+  "scripts": {
+    "check": "node --check src/content.js",
+    "build": "node scripts/generate-changelog.js && node scripts/build.js",
+    "release:check": "node scripts/release-check.js",
+    "zip": "npm run build && npm run release:check && node scripts/zip.js",
+    "test": "node scripts/test.js",
+    "preview": "node -e \"const http=require('http');const fs=require('fs');const path=require('path');const root=process.cwd();const port=4173;const mime={'.html':'text/html;charset=utf-8','.js':'application/javascript;charset=utf-8','.css':'text/css;charset=utf-8','.png':'image/png','.svg':'image/svg+xml','.json':'application/json;charset=utf-8'};http.createServer((req,res)=>{const urlPath=decodeURIComponent((req.url||'/').split('?')[0]);const safePath=urlPath==='/'?'/preview/mock-ui.html':urlPath;const filePath=path.normalize(path.join(root,safePath));if(!filePath.startsWith(root)){res.writeHead(403);res.end('Forbidden');return;}fs.readFile(filePath,(err,data)=>{if(err){res.writeHead(404);res.end('Not Found');return;}res.writeHead(200,{'Content-Type':mime[path.extname(filePath)]||'application/octet-stream'});res.end(data);});}).listen(port,()=>console.log('Preview running at http://localhost:'+port+'/preview/mock-ui.html'));\""
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "manifest_version": 3,
+  "name": "豆包导出助手",
+  "version": "1.0.0",
+  "description": "在浏览器本地将豆包网页对话导出为 Markdown、HTML、JSON 或 TXT。",
+  "permissions": [
+    "storage",
+    "downloads",
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "https://doubao.com/*",
+    "https://www.doubao.com/*",
+    "https://*.doubao.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://doubao.com/*",
+        "https://www.doubao.com/*",
+        "https://*.doubao.com/*"
+      ],
+      "js": [
+        "lib/jszip.min.js",
+        "ui/framework.js",
+        "content.js"
+      ],
+      "css": [
+        "styles/ui-tokens.css",
+        "styles/ui-shell.css",
+        "styles/dialog.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "bridge.js",
+        "export-worker.js",
+        "lib/jszip.min.js"
+      ],
+      "matches": [
+        "https://doubao.com/*",
+        "https://www.doubao.com/*",
+        "https://*.doubao.com/*"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "豆包导出助手",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  }
+}

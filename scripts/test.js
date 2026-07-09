@@ -153,12 +153,14 @@ function loadHelpers() {
     state,
     currentConversationId,
     currentConversationUrl,
+    documentConversationTitle,
     parseSingleChainMessages,
     shouldReplaceConversation,
     buildWebTabIdCandidates,
     ensureRequestUrl,
     isSingleChainUrl,
     collectSidebarSummaries,
+    updateSummary,
     handleBridgeMessage,
     panelHtml,
     bindPanel,
@@ -2101,6 +2103,36 @@ function testSidebarSummaryFiltering() {
   assert.equal(summaries[0].title, "Project A");
 }
 
+function testDocumentConversationTitleFallsBackToCurrentSidebarTitle() {
+  const { helpers, context } = loadHelpers();
+  resetState(helpers);
+  context.location.href = "https://www.doubao.com/chat/38434023837653506";
+  context.document.title = "豆包 - 字节跳动旗下 AI 智能助手";
+  context.__anchors = [
+    createAnchor({ href: "/chat/38434023837653506", title: "豆包" }),
+    createAnchor({ href: "/chat/38434023837653506", title: "十首古诗", id: "conversation_38434023837653506" })
+  ];
+
+  assert.equal(helpers.documentConversationTitle(), "十首古诗");
+}
+
+function testSummaryKeepsSpecificTitleOverGenericTitle() {
+  const { helpers } = loadHelpers();
+  resetState(helpers);
+  helpers.state.cache.summaries["38434023837653506"] = {
+    id: "38434023837653506",
+    title: "十首古诗"
+  };
+
+  helpers.updateSummary({
+    id: "38434023837653506",
+    title: "豆包",
+    messageCount: 4
+  });
+
+  assert.equal(helpers.state.cache.summaries["38434023837653506"].title, "十首古诗");
+}
+
 function testRemoteCountAndProgressIgnoreIndexLikeCounts() {
   const { helpers } = loadHelpers();
   resetState(helpers);
@@ -3579,6 +3611,8 @@ async function main() {
   await testSaveCacheTrimsHugeConversationOnlyInStorage();
   await testExecuteJsonRequestTimesOut();
   testSidebarSummaryFiltering();
+  testDocumentConversationTitleFallsBackToCurrentSidebarTitle();
+  testSummaryKeepsSpecificTitleOverGenericTitle();
   testRemoteCountAndProgressIgnoreIndexLikeCounts();
   testPanelHtmlMatchesLatestUiContract();
   await testRuntimeLogCopyButtonCopiesDiagnostics();

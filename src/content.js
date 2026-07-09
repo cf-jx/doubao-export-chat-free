@@ -367,6 +367,29 @@
     return sidebarConversationUrl(match);
   }
 
+  function cleanConversationTitle(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
+  }
+
+  function isGenericConversationTitle(value) {
+    const title = cleanConversationTitle(value);
+    return !title || /^(豆包|doubao|doubao conversation|豆包会话)$/i.test(title);
+  }
+
+  function preferSpecificTitle(primary, fallback = "") {
+    const next = cleanConversationTitle(primary);
+    const previous = cleanConversationTitle(fallback);
+    if (isGenericConversationTitle(next) && !isGenericConversationTitle(previous)) return previous;
+    return next || previous;
+  }
+
+  function sidebarConversationTitleForId(conversationId) {
+    const id = String(conversationId || "").trim();
+    if (!id) return "";
+    const match = sidebarConversationAnchors().find((anchor) => sidebarConversationIdFromAnchor(anchor) === id);
+    return cleanConversationTitle(match?.textContent || match?.innerText || "");
+  }
+
   function normalizedAgentBotUrl(url = location.href) {
     try {
       const parsed = new URL(url, location.origin);
@@ -474,10 +497,14 @@
   }
 
   function documentConversationTitle() {
-    const title = document.title.replace(/\s*[-|].*$/, "").trim();
-    if (title) return title;
+    const title = cleanConversationTitle(document.title.replace(/\s*[-|].*$/, ""));
+    if (!isGenericConversationTitle(title)) return title;
+    const sidebarTitle = sidebarConversationTitleForId(currentConversationId());
+    if (!isGenericConversationTitle(sidebarTitle)) return sidebarTitle;
     const heading = document.querySelector("h1, h2, [role='heading']");
-    return heading?.textContent?.trim() || "Doubao conversation";
+    const headingTitle = cleanConversationTitle(heading?.textContent || "");
+    if (!isGenericConversationTitle(headingTitle)) return headingTitle;
+    return title || headingTitle || "Doubao conversation";
   }
 
   function isNoiseText(text) {
@@ -974,10 +1001,12 @@
     );
     const captureState = mergeCaptureState(existing.captureState, inferredCaptureState);
     const messageCountSource = summary.messageCountSource || existing.messageCountSource || "";
+    const title = preferSpecificTitle(summary.title, existing.title);
     state.cache.summaries[summary.id] = {
       ...existing,
       ...summary,
       id: summary.id,
+      title,
       url: summary.url || existing.url || currentConversationUrl(summary.id),
       messageCount,
       messageCountSource,
@@ -1010,9 +1039,11 @@
       ...existing,
       ...normalizedConversation
     });
+    const title = preferSpecificTitle(normalizedConversation.title, existing?.title || existingSummary.title);
     const candidate = {
       ...existing,
       ...normalizedConversation,
+      title,
       captureState,
       full: captureState === "full",
       updatedAt: new Date().toISOString()
@@ -1035,7 +1066,7 @@
     }
     updateSummary({
       id: normalizedConversation.id,
-      title: normalizedConversation.title || existingSummary.title || "未命名会话",
+      title: candidate.title || existingSummary.title || "未命名会话",
       url: normalizedConversation.url || existingSummary.url || currentConversationUrl(normalizedConversation.id),
       messageCount: candidate.captureState === "full"
         ? loadedMessageCount
@@ -4171,6 +4202,12 @@
     return null;
   }
 
+  function withFreshCurrentConversationTitle(conversation) {
+    if (!conversation) return conversation;
+    const title = preferSpecificTitle(conversation.title, documentConversationTitle());
+    return title && title !== conversation.title ? { ...conversation, title } : conversation;
+  }
+
   function expectedMessageCountForConversation(conversationId) {
     const count = Number(state.cache.summaries?.[conversationId]?.messageCount || 0);
     const source = String(state.cache.summaries?.[conversationId]?.messageCountSource || "");
@@ -6294,6 +6331,7 @@
         interval: 280
       });
       conversation = maybePromoteConversationToFull(conversation);
+      conversation = withFreshCurrentConversationTitle(conversation);
       if (conversation?.id && conversation?.full) {
         upsertConversation(conversation);
         conversation = state.cache.conversations[conversation.id] || conversation;
